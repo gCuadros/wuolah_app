@@ -1,11 +1,37 @@
-import Cardlist from '@/components/Cardlist';
+import Cardlist, { DataUniversities } from '@/components/Cardlist';
+import { UseQueryResult, useQuery } from 'react-query';
+
 import Head from 'next/head';
 import { Hero } from '@/components/Hero';
 import type { NextPage } from 'next';
 import SectionLayout from '@/components/Section';
+import { getUniversities } from '@/services/getUniversities';
 import mainImage from '@/public/assets/mainImg.jpg';
 
 const Universities: NextPage = () => {
+  const {
+    isLoading,
+    isSuccess,
+    isError,
+    data,
+  }: UseQueryResult<DataUniversities, Error> = useQuery<
+    DataUniversities,
+    Error
+  >('universities', getUniversities);
+
+  const renderResult = () => {
+    if (isLoading) {
+      return <div className="search-message">Loading...</div>;
+    }
+    if (isError) {
+      return <div className="search-message">Something went wrong</div>;
+    }
+    if (isSuccess) {
+      console.log(data);
+      return <Cardlist dataUniversities={data} />;
+    }
+  };
+
   return (
     <>
       <Head>
@@ -30,10 +56,8 @@ const Universities: NextPage = () => {
             ctaLink="/signup"
           />
         </SectionLayout>
-
-        <SectionLayout backgroundColor={'#f8fafb'}>
-          <Cardlist />
-        </SectionLayout>
+        {renderResult()}
+        <SectionLayout backgroundColor={'#f8fafb'}></SectionLayout>
       </main>
     </>
   );

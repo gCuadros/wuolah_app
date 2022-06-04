@@ -1,11 +1,18 @@
 import { Heading, SimpleGrid } from '@chakra-ui/react';
 
 import Card from '@/components/Card';
+import { FC } from 'react';
 import LandingLayout from '@/components/LandingLayout';
 
-type Props = {};
+export interface DataUniversities {
+  id: number;
+  slug: string;
+  name: string;
+  shortName: string;
+  logoUrl: string;
+}
 
-const CardList = (props: Props) => {
+const CardList: FC<DataUniversities[]> = ({ dataUniversities }) => {
   return (
     <LandingLayout>
       <Heading
@@ -30,11 +37,16 @@ const CardList = (props: Props) => {
         ¿En qué universidad estudias?
       </Heading>
       <SimpleGrid columns={2} spacing={10} marginTop={20} marginBottom={20}>
-        <Card
-          imageUrl={'@/public/assets/mainImg.jpg'}
-          imageAlt={'university'}
-          cardTitle={'Universidad Autónoma de Barcelona'}
-        />
+        {dataUniversities.map(
+          ({ logoUrl, shortName, name, id }: DataUniversities) => (
+            <Card
+              key={id}
+              imageUrl={logoUrl}
+              imageAlt={shortName}
+              cardTitle={name}
+            />
+          )
+        )}
       </SimpleGrid>
     </LandingLayout>
   );

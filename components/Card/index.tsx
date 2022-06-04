@@ -19,9 +19,7 @@ const Card = (props: Props) => {
       padding="30px"
     >
       <Image
-        src={
-          'https://s3-eu-west-1.amazonaws.com/wuolah-public/imagenes/universidades/5/universidad-alfonso-x-el-sabio-logo.jpg'
-        }
+        src={props.imageUrl}
         alt={props.imageAlt}
         width={120}
         style={{ margin: 'auto' }}
