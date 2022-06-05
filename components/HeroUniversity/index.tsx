@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Image, Stack, Text } from '@chakra-ui/react';
 
 import { FC } from 'react';
 import LandingLayout from '@/components/LandingLayout';
+import { useRouter } from 'next/router';
 
 interface HeroProps {
   title: string;
@@ -10,10 +11,20 @@ interface HeroProps {
   image: string;
 }
 
-const Hero: FC<HeroProps> = ({ title, subtitle, text, image, ...rest }) => {
+const HeroUniversity: FC<HeroProps> = ({
+  title,
+  subtitle,
+  text,
+  image,
+  ...rest
+}) => {
+  const router = useRouter();
+
   return (
     <LandingLayout>
+      <button onClick={() => router.back()}>Back</button>
       <Flex
+        width="100%"
         align="center"
         justify={{ base: 'center', md: 'space-around', xl: 'space-between' }}
         direction={{ base: 'column-reverse', md: 'row' }}
@@ -25,9 +36,12 @@ const Hero: FC<HeroProps> = ({ title, subtitle, text, image, ...rest }) => {
       >
         <Stack
           spacing={4}
-          w={{ base: '80%', md: '40%' }}
+          width={{ base: '80%', md: '40%' }}
           align={['center', 'center', 'flex-start', 'flex-start']}
         >
+          <Box width="25%" mb={{ base: 12, md: 0 }}>
+            <Image src={image} boxSize="100%" rounded="1rem" />
+          </Box>
           <Heading
             as="h1"
             size="xl"
@@ -58,12 +72,19 @@ const Hero: FC<HeroProps> = ({ title, subtitle, text, image, ...rest }) => {
             {text}
           </Text>
         </Stack>
-        <Box w={{ base: '80%', sm: '60%', md: '50%' }} mb={{ base: 12, md: 0 }}>
-          <Image src={image} boxSize="100%" rounded="1rem" shadow="2xl" />
+        <Box
+          width={{ base: '80%', sm: '60%', md: '50%' }}
+          mb={{ base: 12, md: 0 }}
+        >
+          <Image
+            src="https://img.freepik.com/free-vector/students-lecture-hall-with-teacher-explain-information-learning-process-university-auditorium-with-scholars-professor-seminar-education-studying-concept-line-art-vector-illustration_107791-11109.jpg?t=st=1654390063~exp=1654390663~hmac=a1958fbfbe59bb812ee31a74706ee698017508f2e38696d6813d7cc96c8d08f5&w=1380"
+            boxSize="100%"
+            rounded="1rem"
+          />
         </Box>
       </Flex>
     </LandingLayout>
   );
 };
 
-export default Hero;
+export default HeroUniversity;

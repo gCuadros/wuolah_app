@@ -1,34 +1,44 @@
-import Cardlist, { DataUniversities } from '@/components/Cardlist';
-import { UseQueryResult, useQuery } from 'react-query';
+import { Alert, AlertIcon, SimpleGrid, Spinner } from '@chakra-ui/react';
 
+import Cardlist from '@/components/Cardlist';
 import Head from 'next/head';
-import { Hero } from '@/components/Hero';
+import Hero from '@/components/Hero';
+import LandingLayout from '@/components/LandingLayout';
 import type { NextPage } from 'next';
 import SectionLayout from '@/components/Section';
-import { getUniversities } from '@/services/getUniversities';
 import mainImage from '@/public/assets/mainImg.jpg';
+import { useUniversities } from '@/hooks/useUniversities';
 
-const Universities: NextPage = () => {
-  const {
-    isLoading,
-    isSuccess,
-    isError,
-    data,
-  }: UseQueryResult<DataUniversities, Error> = useQuery<
-    DataUniversities,
-    Error
-  >('universities', getUniversities);
+const UniversitiesPage: NextPage = () => {
+  const { isLoading, isSuccess, isError, data } = useUniversities();
 
   const renderResult = () => {
     if (isLoading) {
-      return <div className="search-message">Loading...</div>;
+      return (
+        <LandingLayout>
+          <SimpleGrid columns={1} marginTop={20} marginBottom={20}>
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          </SimpleGrid>
+        </LandingLayout>
+      );
     }
     if (isError) {
-      return <div className="search-message">Something went wrong</div>;
+      return (
+        <Alert status="error">
+          <AlertIcon />
+          There was an error processing your request
+        </Alert>
+      );
     }
     if (isSuccess) {
       console.log(data);
-      return <Cardlist dataUniversities={data} />;
+      return <Cardlist universities={data} />;
     }
   };
 
@@ -52,15 +62,14 @@ const Universities: NextPage = () => {
             subtitle="Descarga y consulta gratis los apuntes de tus compañeros de forma fácil y ordenada en más de 4 millones de documentos."
             text="comparte, pregunta y estudia. Desde casa."
             image="https://wuolah-web.s3-eu-west-1.amazonaws.com/assets/img/index/header.jpg"
-            ctaText="Create your account now"
-            ctaLink="/signup"
           />
         </SectionLayout>
-        {renderResult()}
-        <SectionLayout backgroundColor={'#f8fafb'}></SectionLayout>
+        <SectionLayout backgroundColor={'#f8fafb'}>
+          {renderResult()}
+        </SectionLayout>
       </main>
     </>
   );
 };
 
-export default Universities;
+export default UniversitiesPage;
