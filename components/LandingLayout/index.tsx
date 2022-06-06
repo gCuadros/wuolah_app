@@ -6,8 +6,8 @@ const LandingLayout: FC<FlexProps> = (props) => {
     <Flex
       direction="column"
       align="center"
-      maxW={{ xl: '1200px' }}
-      m="0 auto"
+      maxWidth={{ xl: '1200px' }}
+      margin="0 auto"
       {...props}
     >
       {props.children}

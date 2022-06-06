@@ -3,6 +3,7 @@ import { Alert, AlertIcon, SimpleGrid, Spinner } from '@chakra-ui/react';
 import Cardlist from '@/components/Cardlist';
 import Head from 'next/head';
 import Hero from '@/components/Hero';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import LandingLayout from '@/components/LandingLayout';
 import type { NextPage } from 'next';
 import SectionLayout from '@/components/Section';
@@ -10,7 +11,14 @@ import mainImage from '@/public/assets/mainImg.jpg';
 import { useUniversities } from '@/hooks/useUniversities';
 
 const UniversitiesPage: NextPage = () => {
-  const { isLoading, isSuccess, isError, data } = useUniversities();
+  const {
+    universities,
+    isLoading,
+    isSuccess,
+    isError,
+    hasNextPage,
+    fetchNextPage,
+  } = useUniversities();
 
   const renderResult = () => {
     if (isLoading) {
@@ -37,8 +45,25 @@ const UniversitiesPage: NextPage = () => {
       );
     }
     if (isSuccess) {
-      console.log(data);
-      return <Cardlist universities={data} />;
+      return (
+        <InfiniteScroll
+          dataLength={universities.length}
+          hasMore={hasNextPage as boolean}
+          next={() => fetchNextPage()}
+          style={{ overflow: 'hidden' }}
+          loader={
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+          }
+        >
+          <Cardlist universities={universities} />;
+        </InfiniteScroll>
+      );
     }
   };
 
