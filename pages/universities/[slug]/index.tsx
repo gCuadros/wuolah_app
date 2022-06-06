@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import HeroUniversity from '@/components/HeroUniversity';
 import { IDataUniversities } from '@/lib/interfaces/IUniversities.vm';

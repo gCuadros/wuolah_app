@@ -32,7 +32,7 @@ const CardList = ({ universities }: IUniversities) => {
         ¿En qué universidad estudias?
       </Heading>
       <SimpleGrid
-        columns={{ base: 2, xl: 2, xs: 1 }}
+        columns={{ base: 1, md: 2, lg: 2 }}
         spacing={10}
         marginTop={20}
         marginBottom={20}

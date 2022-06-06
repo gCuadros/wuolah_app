@@ -10,7 +10,6 @@ import LandingLayout from '@/components/LandingLayout';
 import type { NextPage } from 'next';
 import SectionLayout from '@/components/Section';
 import { getUniversities } from '@/services/getUniversities';
-import mainImage from '@/public/assets/mainImg.jpg';
 import { useUniversities } from '@/hooks/useUniversities';
 
 const UniversitiesPage: NextPage = (props) => {
@@ -105,7 +104,7 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
 }> => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery('universities', () =>
-    JSON.parse(getUniversities)
+    JSON.parse(JSON.stringify(getUniversities))
   );
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };

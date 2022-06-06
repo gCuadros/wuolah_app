@@ -8,7 +8,7 @@ const Hero = ({ title, subtitle, text, image, ...rest }: IHeroProps) => {
     <LandingLayout>
       <Flex
         align="center"
-        justify={{ base: 'center', md: 'space-around', xl: 'space-between' }}
+        justify={{ base: 'center', md: 'space-around', lg: 'space-between' }}
         direction={{ base: 'column-reverse', md: 'row' }}
         wrap="nowrap"
         minH="70vh"
@@ -51,7 +51,7 @@ const Hero = ({ title, subtitle, text, image, ...rest }: IHeroProps) => {
             {text}
           </Text>
         </Stack>
-        <Box w={{ base: '80%', sm: '60%', md: '50%' }} mb={{ base: 12, md: 0 }}>
+        <Box w={{ base: '80%', md: '60%', lg: '50%' }} mb={{ base: 12, md: 0 }}>
           <Image src={image} boxSize="100%" rounded="1rem" shadow="2xl" />
         </Box>
       </Flex>

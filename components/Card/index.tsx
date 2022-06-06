@@ -1,9 +1,10 @@
 import { Flex, Image, Text } from '@chakra-ui/react';
 
+import { FC } from 'react';
 import { ICardProps } from '@/lib/interfaces/ICard.vm';
 import Link from 'next/link';
 
-const Card = (props: ICardProps) => {
+const Card: FC<ICardProps> = (props) => {
   return (
     <Link
       href={{
@@ -17,7 +18,7 @@ const Card = (props: ICardProps) => {
           direction="column"
           justifyContent="center"
           backgroundColor="#ffff"
-          width={{ base: 'sm', lg: 'lg', xs: 'xs' }}
+          width={{ base: 'sm', md: 'lg', lg: 'xs' }}
           height="xs"
           borderRadius="1rem"
           borderWidth="1px"
