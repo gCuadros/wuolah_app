@@ -1,31 +1,14 @@
 import { Box, Flex, Heading, Image, Stack, Text } from '@chakra-ui/react';
 
-import { FC } from 'react';
+import { IHeroProps } from '@/lib/interfaces/IHero.vm';
 import LandingLayout from '@/components/LandingLayout';
 
-interface HeroProps {
-  title: string;
-  subtitle: string;
-  text: string;
-  image: string;
-  ctaText: string;
-  ctaLink: string;
-}
-
-export const Hero: FC<HeroProps> = ({
-  title,
-  subtitle,
-  text,
-  image,
-  ctaLink,
-  ctaText,
-  ...rest
-}) => {
+const Hero = ({ title, subtitle, text, image, ...rest }: IHeroProps) => {
   return (
     <LandingLayout>
       <Flex
         align="center"
-        justify={{ base: 'center', md: 'space-around', xl: 'space-between' }}
+        justify={{ base: 'center', md: 'space-around', lg: 'space-between' }}
         direction={{ base: 'column-reverse', md: 'row' }}
         wrap="nowrap"
         minH="70vh"
@@ -39,7 +22,7 @@ export const Hero: FC<HeroProps> = ({
           align={['center', 'center', 'flex-start', 'flex-start']}
         >
           <Heading
-            as="h1"
+            as="h2"
             size="xl"
             fontWeight="bold"
             color="primary.800"
@@ -68,10 +51,12 @@ export const Hero: FC<HeroProps> = ({
             {text}
           </Text>
         </Stack>
-        <Box w={{ base: '80%', sm: '60%', md: '50%' }} mb={{ base: 12, md: 0 }}>
+        <Box w={{ base: '80%', md: '60%', lg: '50%' }} mb={{ base: 12, md: 0 }}>
           <Image src={image} boxSize="100%" rounded="1rem" shadow="2xl" />
         </Box>
       </Flex>
     </LandingLayout>
   );
 };
+
+export default Hero;

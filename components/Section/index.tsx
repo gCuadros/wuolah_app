@@ -1,7 +1,6 @@
 import { Box, BoxProps } from '@chakra-ui/react';
-import React, { FC } from 'react';
 
-const SectionLayout: FC<BoxProps> = (props) => {
+const SectionLayout = (props: BoxProps) => {
   return (
     <Box padding={'20px'} backgroundColor={props.background} {...props}>
       {props.children}
