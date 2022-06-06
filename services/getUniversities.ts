@@ -1,6 +1,3 @@
-import { DehydratedState, QueryClient, dehydrate } from 'react-query';
-
-import { GetServerSideProps } from 'next';
 import { WUOLAH_API } from '@/services/settings';
 
 export const getUniversities = async (pageSize?: number) => {
@@ -19,12 +16,4 @@ export const getUniversities = async (pageSize?: number) => {
         pagination: response.meta.pagination,
       };
     });
-};
-
-export const getServerSideProps: GetServerSideProps = async (): Promise<{
-  props: { dehydratedState: DehydratedState };
-}> => {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery('universities', () => getUniversities);
-  return { props: { dehydratedState: dehydrate(queryClient) } };
 };

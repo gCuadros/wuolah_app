@@ -1,16 +1,19 @@
 import { Alert, AlertIcon, SimpleGrid, Spinner } from '@chakra-ui/react';
+import { DehydratedState, QueryClient, dehydrate } from 'react-query';
 
 import Cardlist from '@/components/Cardlist';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Hero from '@/components/Hero';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LandingLayout from '@/components/LandingLayout';
 import type { NextPage } from 'next';
 import SectionLayout from '@/components/Section';
+import { getUniversities } from '@/services/getUniversities';
 import mainImage from '@/public/assets/mainImg.jpg';
 import { useUniversities } from '@/hooks/useUniversities';
 
-const UniversitiesPage: NextPage = () => {
+const UniversitiesPage: NextPage = (props) => {
   const {
     universities,
     isLoading,
@@ -95,6 +98,16 @@ const UniversitiesPage: NextPage = () => {
       </main>
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (): Promise<{
+  props: { dehydratedState: DehydratedState };
+}> => {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery('universities', () =>
+    JSON.parse(getUniversities)
+  );
+  return { props: { dehydratedState: dehydrate(queryClient) } };
 };
 
 export default UniversitiesPage;

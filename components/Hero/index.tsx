@@ -22,7 +22,7 @@ const Hero = ({ title, subtitle, text, image, ...rest }: IHeroProps) => {
           align={['center', 'center', 'flex-start', 'flex-start']}
         >
           <Heading
-            as="h1"
+            as="h2"
             size="xl"
             fontWeight="bold"
             color="primary.800"

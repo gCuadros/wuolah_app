@@ -1,46 +1,40 @@
-import Router, { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 
-import { DataUniversities } from '@/components/Cardlist';
 import HeroUniversity from '@/components/HeroUniversity';
+import { IDataUniversities } from '@/lib/interfaces/IUniversities.vm';
+import { ParsedUrlQuery } from 'querystring';
+import { RefetchOptions } from 'react-query';
 import SectionLayout from '@/components/Section';
 import { Spinner } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { useRouterQuery } from '@/hooks/useRouterQuery';
 import { useUniversity } from '@/hooks/useUniversity';
 
 const Universities = () => {
-  const [routerData, setRouterData] = useState({});
+  const [routerData, setRouterData] = useState<IDataUniversities>();
   const [loading, setLoading] = useState(true);
   const router = useRouter();
-
+  const routerQuery: IDataUniversities | ParsedUrlQuery | null =
+    useRouterQuery();
   const slug = router.query.slug as string;
   const { data: uni, refetch, isSuccess } = useUniversity(slug, false);
 
-  const useQuery = () => {
-    const router = useRouter();
-    const hasQueryParams =
-      /\[.+\]/.test(router.route) || /\?./.test(router.asPath);
-    const ready = !hasQueryParams || Object.keys(router.query).length > 0;
-    if (!ready) return null;
-    return router.query;
-  };
-
-  const query = useQuery();
-
   useEffect(() => {
-    if (!query) {
+    if (!routerQuery) {
       setLoading(true);
       return;
     }
 
-    if (query.name) {
-      setRouterData({ ...query });
+    if (routerQuery.name) {
+      setRouterData({ ...routerQuery });
       setLoading(false);
       return;
     }
 
-    refetch(query.slug);
+    const universitySlug = routerQuery.slug as RefetchOptions;
+    refetch(universitySlug);
     setLoading(false);
-  }, [query]);
+  }, [routerQuery]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -62,7 +56,7 @@ const Universities = () => {
       );
     }
 
-    if (!loading)
+    if (!loading && routerData)
       return (
         <HeroUniversity
           title={routerData.name}
