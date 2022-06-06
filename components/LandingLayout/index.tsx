@@ -1,7 +1,6 @@
 import { Flex, FlexProps } from '@chakra-ui/react';
-import React, { FC } from 'react';
 
-const LandingLayout: FC<FlexProps> = (props) => {
+const LandingLayout = (props: FlexProps) => {
   return (
     <Flex
       direction="column"

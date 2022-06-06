@@ -1,7 +1,10 @@
 import { Heading, SimpleGrid } from '@chakra-ui/react';
+import {
+  IDataUniversities,
+  IUniversities,
+} from '@/lib/interfaces/IUniversities.vm';
 
 import Card from '@/components/Card';
-import { IUniversities } from '@/lib/interfaces/IUniversities.vm';
 import LandingLayout from '@/components/LandingLayout';
 
 const CardList = ({ universities }: IUniversities) => {
@@ -35,9 +38,10 @@ const CardList = ({ universities }: IUniversities) => {
         marginBottom={20}
       >
         {universities.map(
-          ({ logoUrl, shortName, name, slug, id }: DataUniversities) => (
+          ({ logoUrl, shortName, name, slug, id }: IDataUniversities) => (
             <Card
               key={id}
+              id={id}
               logoUrl={logoUrl}
               slug={slug}
               shortName={shortName}

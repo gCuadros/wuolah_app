@@ -1,6 +1,5 @@
 import { DehydratedState, QueryClient, dehydrate } from 'react-query';
 
-import { GetServerSideProps } from 'next';
 import { WUOLAH_API } from '@/services/settings';
 
 export const getUniversity = async (slug: string) => {

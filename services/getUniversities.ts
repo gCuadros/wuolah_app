@@ -25,6 +25,6 @@ export const getServerSideProps: GetServerSideProps = async (): Promise<{
   props: { dehydratedState: DehydratedState };
 }> => {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery('universities', getUniversities);
+  await queryClient.prefetchQuery('universities', () => getUniversities);
   return { props: { dehydratedState: dehydrate(queryClient) } };
 };
