@@ -1,14 +1,22 @@
-import { Alert, AlertIcon, SimpleGrid, Spinner } from '@chakra-ui/react';
+import {
+  Alert,
+  AlertIcon,
+  Heading,
+  SimpleGrid,
+  Spinner,
+} from '@chakra-ui/react';
 import { DehydratedState, QueryClient, dehydrate } from 'react-query';
 
 import Cardlist from '@/components/Cardlist';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import LandingLayout from '@/components/LandingLayout';
 import type { NextPage } from 'next';
 import SectionLayout from '@/components/Section';
+import bg from '@/public/images/bgr-universtiy.png';
 import { getUniversities } from '@/services/getUniversities';
 import { useUniversities } from '@/hooks/useUniversities';
 
@@ -83,12 +91,21 @@ const UniversitiesPage: NextPage = (props) => {
       </Head>
 
       <main>
-        <SectionLayout>
+        <SectionLayout
+          style={{
+            backgroundImage: `url(${bg.src})`,
+            backgroundSize: '85%',
+            backgroundPosition: 'right bottom',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          <Heading>
+            <Header />
+          </Heading>
           <Hero
             title="Mejora tus notas con Wuolah."
             subtitle="Descarga y consulta gratis los apuntes de tus compañeros de forma fácil y ordenada en más de 4 millones de documentos."
             text="comparte, pregunta y estudia. Desde casa."
-            image="https://wuolah-web.s3-eu-west-1.amazonaws.com/assets/img/index/header.jpg"
           />
         </SectionLayout>
         <SectionLayout backgroundColor={'#f8fafb'}>

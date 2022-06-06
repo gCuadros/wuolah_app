@@ -1,10 +1,9 @@
 import '../styles/globals.css';
 
-import { ChakraProvider, Heading } from '@chakra-ui/react';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 
 import type { AppProps } from 'next/app';
-import Header from '@/components/Header';
+import { ChakraProvider } from '@chakra-ui/react';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { useState } from 'react';
 
@@ -13,9 +12,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ChakraProvider>
-      <Heading>
-        <Header />
-      </Heading>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <Component {...pageProps} />
