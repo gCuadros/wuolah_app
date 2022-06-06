@@ -19,7 +19,7 @@ export const useUniversities = () => {
   );
 
   const universities =
-    result.data?.pages.reduce(
+    result.data?.pages?.reduce(
       (prevUniversities, page) => page.universties,
       []
     ) ?? [];

@@ -17,11 +17,3 @@ export const getUniversities = async (pageSize?: number) => {
       };
     });
 };
-
-export const fetchUniversities = async () => {
-  return fetch(`${WUOLAH_API}/universities`).then((apiResponse) => {
-    if (apiResponse.ok) {
-      return apiResponse.json();
-    }
-  });
-};
