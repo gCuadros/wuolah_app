@@ -71,7 +71,7 @@ const UniversitiesPage: NextPage = (props) => {
             />
           }
         >
-          <Cardlist universities={universities} />;
+          <Cardlist universities={universities} />
         </InfiniteScroll>
       );
     }
