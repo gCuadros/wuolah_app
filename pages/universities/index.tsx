@@ -5,10 +5,9 @@ import {
   SimpleGrid,
   Spinner,
 } from '@chakra-ui/react';
-import { DehydratedState, QueryClient, dehydrate } from 'react-query';
+import { QueryClient, dehydrate } from 'react-query';
 
 import Cardlist from '@/components/Cardlist';
-import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
@@ -17,7 +16,7 @@ import LandingLayout from '@/components/LandingLayout';
 import type { NextPage } from 'next';
 import SectionLayout from '@/components/Section';
 import bg from '@/public/images/bgr-universtiy.png';
-import { getUniversities } from '@/services/getUniversities';
+import { fetchUniversities } from '@/services/getUniversities';
 import { useUniversities } from '@/hooks/useUniversities';
 
 const UniversitiesPage: NextPage = (props) => {
@@ -116,17 +115,16 @@ const UniversitiesPage: NextPage = (props) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (): Promise<{
-  props: { dehydratedState: DehydratedState };
-}> => {
+export async function getServerSideProps() {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery('universities', () => getUniversities);
+
+  await queryClient.prefetchQuery('universities', fetchUniversities);
+
   return {
     props: {
-      dehydratedState:
-        JSON.parse(JSON.stringify(dehydrate(queryClient))) || null,
+      dehydratedState: dehydrate(queryClient),
     },
   };
-};
+}
 
 export default UniversitiesPage;

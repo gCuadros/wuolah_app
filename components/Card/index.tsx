@@ -13,7 +13,7 @@ const Card: FC<ICardProps> = (props) => {
       }}
       as={`/universities/${encodeURIComponent(props.slug)}`}
     >
-      <a>
+      <a id={`university-${props.id.toString()}`}>
         <Flex
           direction="column"
           justifyContent="center"

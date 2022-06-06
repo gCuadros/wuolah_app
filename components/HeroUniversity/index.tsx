@@ -26,11 +26,12 @@ const HeroUniversity = ({
     <main>
       <LandingLayout>
         <Button
+          id="back-button"
           leftIcon={<ArrowBackIcon />}
           variant="outline"
           onClick={() => router.back()}
         >
-          Back to Universities
+          Universidades
         </Button>
 
         <Flex
