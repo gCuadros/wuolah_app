@@ -1,17 +1,19 @@
 import { Heading, Spinner } from '@chakra-ui/react';
+import { QueryClient, RefetchOptions, dehydrate } from 'react-query';
 import { useEffect, useState } from 'react';
 
+import { GetServerSideProps } from 'next';
 import Header from '@/components/Header';
 import HeroUniversity from '@/components/HeroUniversity';
 import { IDataUniversities } from '@/lib/interfaces/IUniversities.vm';
 import { ParsedUrlQuery } from 'querystring';
-import { RefetchOptions } from 'react-query';
 import SectionLayout from '@/components/Section';
+import { getUniversity } from '@/services/getUniversity';
 import { useRouter } from 'next/router';
 import { useRouterQuery } from '@/hooks/useRouterQuery';
 import { useUniversity } from '@/hooks/useUniversity';
 
-const Universities = () => {
+const Universities = (props) => {
   const [routerData, setRouterData] = useState<IDataUniversities>();
   const [loading, setLoading] = useState(true);
   const router = useRouter();
@@ -77,5 +79,19 @@ const Universities = () => {
     </SectionLayout>
   );
 };
+
+export async function getServerSideProps(context: GetServerSideProps) {
+  const { params } = context;
+  const { slug } = params;
+  console.log(slug);
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery('university', () => getUniversity(slug));
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 
 export default Universities;
