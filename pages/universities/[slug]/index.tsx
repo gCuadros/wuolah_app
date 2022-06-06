@@ -83,7 +83,6 @@ const Universities = (props) => {
 export async function getServerSideProps(context: GetServerSideProps) {
   const { params } = context;
   const { slug } = params;
-  console.log(slug);
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery('university', () => getUniversity(slug));
 
