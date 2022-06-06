@@ -23,5 +23,6 @@ module.exports = {
   rules: {
     'react/prop-types': RULES.OFF,
     'react/react-in-jsx-scope': RULES.OFF,
+    'jest/expect-expect': 'off',
   },
 };
