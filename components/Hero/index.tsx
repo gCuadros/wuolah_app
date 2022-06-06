@@ -1,9 +1,9 @@
-import { Box, Flex, Heading, Image, Stack, Text } from '@chakra-ui/react';
+import { Flex, Heading, Stack, Text } from '@chakra-ui/react';
 
 import { IHeroProps } from '@/lib/interfaces/IHero.vm';
 import LandingLayout from '@/components/LandingLayout';
 
-const Hero = ({ title, subtitle, text, image, ...rest }: IHeroProps) => {
+const Hero = ({ title, subtitle, text, ...rest }: IHeroProps) => {
   return (
     <LandingLayout>
       <Flex
@@ -51,9 +51,6 @@ const Hero = ({ title, subtitle, text, image, ...rest }: IHeroProps) => {
             {text}
           </Text>
         </Stack>
-        <Box w={{ base: '80%', md: '60%', lg: '50%' }} mb={{ base: 12, md: 0 }}>
-          <Image src={image} boxSize="100%" rounded="1rem" shadow="2xl" />
-        </Box>
       </Flex>
     </LandingLayout>
   );

@@ -1,11 +1,12 @@
+import { Heading, Spinner } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
+import Header from '@/components/Header';
 import HeroUniversity from '@/components/HeroUniversity';
 import { IDataUniversities } from '@/lib/interfaces/IUniversities.vm';
 import { ParsedUrlQuery } from 'querystring';
 import { RefetchOptions } from 'react-query';
 import SectionLayout from '@/components/Section';
-import { Spinner } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useRouterQuery } from '@/hooks/useRouterQuery';
 import { useUniversity } from '@/hooks/useUniversity';
@@ -67,7 +68,14 @@ const Universities = () => {
       );
   };
 
-  return <SectionLayout>{render()}</SectionLayout>;
+  return (
+    <SectionLayout>
+      <Heading>
+        <Header />
+      </Heading>
+      {render()}
+    </SectionLayout>
+  );
 };
 
 export default Universities;
