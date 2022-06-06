@@ -20,6 +20,7 @@
       "@/public/*": ["public/*"],
       "@/services/*": ["services/*"],
       "@/hooks/*": ["hooks/*"],
+      "@/lib/*": ["lib/*"],
       "@/styles/*": ["styles/*"]
     }
   },

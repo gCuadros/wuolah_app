@@ -1,16 +1,9 @@
 import { Flex, Image, Text } from '@chakra-ui/react';
 
+import { ICardProps } from '@/lib/interfaces/ICard.vm';
 import Link from 'next/link';
 
-type Props = {
-  id: 1;
-  slug: string;
-  name: string;
-  shortName: string;
-  logoUrl: string;
-};
-
-const Card = (props: Props) => {
+const Card = (props: ICardProps) => {
   return (
     <Link
       href={{
@@ -24,7 +17,8 @@ const Card = (props: Props) => {
           direction="column"
           justifyContent="center"
           backgroundColor="#ffff"
-          maxWidth="lg"
+          width={{ base: 'sm', lg: 'lg', xs: 'xs' }}
+          height="xs"
           borderRadius="1rem"
           borderWidth="1px"
           boxShadow="0 1px 4px rgba(55,73,87,.06),0 10px 20px rgba(55,73,87,.1)"

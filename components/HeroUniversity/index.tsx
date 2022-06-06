@@ -1,43 +1,84 @@
-import { Box, Flex, Heading, Image, Stack, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 
-import { FC } from 'react';
+import { ArrowBackIcon } from '@chakra-ui/icons';
+import { IHeroProps } from '@/lib/interfaces/IHero.vm';
 import LandingLayout from '@/components/LandingLayout';
 import { useRouter } from 'next/router';
 
-interface HeroProps {
-  title: string;
-  subtitle: string;
-  text: string;
-  image: string;
-}
-
-const HeroUniversity: FC<HeroProps> = ({
+const HeroUniversity = ({
   title,
   subtitle,
   text,
   image,
   ...rest
-}) => {
+}: IHeroProps) => {
   const router = useRouter();
 
   return (
     <LandingLayout>
-      <button onClick={() => router.back()}>Back</button>
+      <Button
+        leftIcon={<ArrowBackIcon />}
+        variant="outline"
+        onClick={() => router.back()}
+      >
+        Back to Universities
+      </Button>
+
       <Flex
         width="100%"
         align="center"
-        justify={{ base: 'center', md: 'space-around', xl: 'space-between' }}
-        direction={{ base: 'column-reverse', md: 'row' }}
+        justify="space-between"
+        direction="column"
         wrap="nowrap"
-        minH="70vh"
         px={8}
         mb={16}
         {...rest}
       >
         <Stack
           spacing={4}
+          align={['center', 'center', 'flex-start', 'flex-start']}
+          marginBottom={20}
+          marginTop={20}
+        >
+          <Heading
+            as="h1"
+            size="xl"
+            fontWeight="bold"
+            color="primary.800"
+            textAlign={['center', 'center', 'left', 'left']}
+          >
+            Descarga los apuntes de clase gratis.
+          </Heading>
+          <Heading
+            as="h2"
+            size="md"
+            color="primary.800"
+            opacity="0.8"
+            fontWeight="normal"
+            lineHeight={1.5}
+            textAlign={['center', 'center', 'left', 'left']}
+          >
+            Disponible también la EBAU. Ver apuntes de EBAU.
+          </Heading>
+        </Stack>
+        <Stack
+          spacing={4}
+          display="flex"
           width={{ base: '80%', md: '40%' }}
           align={['center', 'center', 'flex-start', 'flex-start']}
+          maxWidth="lg"
+          borderRadius="1rem"
+          borderWidth="1px"
+          boxShadow="0 1px 4px rgba(55,73,87,.06),0 10px 20px rgba(55,73,87,.1)"
+          padding="30px"
         >
           <Box width="25%" mb={{ base: 12, md: 0 }}>
             <Image src={image} boxSize="100%" rounded="1rem" />
@@ -72,16 +113,6 @@ const HeroUniversity: FC<HeroProps> = ({
             {text}
           </Text>
         </Stack>
-        <Box
-          width={{ base: '80%', sm: '60%', md: '50%' }}
-          mb={{ base: 12, md: 0 }}
-        >
-          <Image
-            src="https://img.freepik.com/free-vector/students-lecture-hall-with-teacher-explain-information-learning-process-university-auditorium-with-scholars-professor-seminar-education-studying-concept-line-art-vector-illustration_107791-11109.jpg?t=st=1654390063~exp=1654390663~hmac=a1958fbfbe59bb812ee31a74706ee698017508f2e38696d6813d7cc96c8d08f5&w=1380"
-            boxSize="100%"
-            rounded="1rem"
-          />
-        </Box>
       </Flex>
     </LandingLayout>
   );

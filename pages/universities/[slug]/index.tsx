@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { DataUniversities } from '@/components/Cardlist';
 import HeroUniversity from '@/components/HeroUniversity';
 import SectionLayout from '@/components/Section';
+import { Spinner } from '@chakra-ui/react';
 import { useUniversity } from '@/hooks/useUniversity';
 
 const Universities = () => {
@@ -50,19 +51,25 @@ const Universities = () => {
 
   const render = () => {
     if (loading) {
-      return <h1>loading</h1>;
+      return (
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="black.500"
+          size="xl"
+        />
+      );
     }
 
     if (!loading)
       return (
-        <SectionLayout>
-          <HeroUniversity
-            title={routerData.name}
-            subtitle={routerData.shortName}
-            text="comparte, pregunta y estudia. Desde casa."
-            image={routerData.logoUrl}
-          />
-        </SectionLayout>
+        <HeroUniversity
+          title={routerData.name}
+          subtitle={routerData.shortName}
+          text="comparte, pregunta y estudia. Desde casa."
+          image={routerData.logoUrl}
+        />
       );
   };
 

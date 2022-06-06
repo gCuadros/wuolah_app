@@ -1,16 +1,9 @@
 import { Box, Flex, Heading, Image, Stack, Text } from '@chakra-ui/react';
 
-import { FC } from 'react';
+import { IHeroProps } from '@/lib/interfaces/IHero.vm';
 import LandingLayout from '@/components/LandingLayout';
 
-interface HeroProps {
-  title: string;
-  subtitle: string;
-  text: string;
-  image: string;
-}
-
-const Hero: FC<HeroProps> = ({ title, subtitle, text, image, ...rest }) => {
+const Hero = ({ title, subtitle, text, image, ...rest }: IHeroProps) => {
   return (
     <LandingLayout>
       <Flex
